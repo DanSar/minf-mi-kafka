@@ -32,31 +32,35 @@ Kafka ...
 
 \begin{frame}
 \frametitle{Unternehmen und Use Cases}
-\begin{itemize}
-	\item \includegraphics[scale=0.2]{figure/linkedin_logo.pdf} 
-		- Operationsmetriken
-	\item \includegraphics[scale=0.2]{figure/cisco_logo.pdf} 
-		- OpenSOC (Security Operations Center)
-	\item \includegraphics[scale=0.08]{figure/netflix_logo.pdf} 
-		- Real-time monitoring and event-processing pipeline
-	\item \includegraphics[scale=0.2]{figure/spotify_logo.pdf} 
-		- Log Delivery System
-	\item \includegraphics[scale=0.1]{figure/twitter_logo.pdf} 
-		- Teil der Storm Stream Processing Infrastruktur
-\end{itemize}
+
+\begin{tabular}{ l l }
+	\includegraphics[scale=0.2]{figure/linkedin_logo.pdf} & Operational Metrics\\~\\
+	\includegraphics[scale=0.2]{figure/cisco_logo.pdf} & OpenSOC (Security Operations Center)\\~\\
+	\includegraphics[scale=0.08]{figure/netflix_logo.pdf} & Real-time monitoring and event-processing pipeline\\~\\
+	\includegraphics[scale=0.2]{figure/spotify_logo.pdf} & Log Delivery System\\~\\
+	\includegraphics[scale=0.1]{figure/twitter_logo.pdf} & Teil der Storm Stream Processing Infrastruktur
+\end{tabular}
+
 \end{frame}
 
 \begin{frame}
 \frametitle{Komponenten}
 	\centering
-	\includegraphics[scale=1.4]{figure/kafka-apis.png}
+	\includegraphics[scale=1.5]{figure/kafka-apis.png}
 \end{frame}
 
 \begin{frame}
-\frametitle{Topics}
-	\begin{center}
-		B I L D
-	\end{center}
+\frametitle{Queue}
+\begin{center}
+	\centering
+	\includegraphics[scale=0.6]{figure/queue_draw.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Topic}
+	\centering
+	\includegraphics[scale=0.6]{figure/topic_draw.pdf}
 \end{frame}
 
 \begin{frame}
@@ -72,6 +76,7 @@ Kafka ...
 			\item Log-Compaction
 		\end{itemize}
 	\item Topics besitzen Partitionen (partition log)
+	\item Guarantees (dazu später mehr)
 \end{itemize}
 \end{frame}
 
