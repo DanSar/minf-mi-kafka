@@ -16,8 +16,8 @@ Using screen cast and python.
     - parse Tweet and extract emoji -> push every emoji to (new) topic.
     - create graph periodically (every 5s): https://plot.ly/python/
   - Consumers:
-    - get
-
+    - trending events: https://twitter.com/OfficialSanta/status/923455168435417088
+    - show graph periodically
 
 ## Topics
 TWITTER -producer-> TWEETs -stream-> EMOJIs -stream-> PLOTs
