@@ -226,3 +226,9 @@ TSWLatexianTemp*
 *-tags.tex
 
 # End of https://www.gitignore.io/api/latex
+
+### tutorial ###
+# vim python
+tutorial/.ropeproject/
+tutorial/libs/
+tutorial/kafka_env/

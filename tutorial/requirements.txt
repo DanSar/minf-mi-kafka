@@ -1,0 +1,9 @@
+kafka-python==1.3.5
+confluent-kafka==0.11.0 --global-option=build_ext \
+	 --global-option="--rpath=/opt/librdkafka/lib/" \
+	--global-option="--library-dirs=/opt/librdkafka/lib" \
+	--global-option="--include-dirs=/opt/librdkafka/include/librdkafka"
+git+https://github.com/wintoncode/winton-kafka-streams.git --global-option=build_ext \
+	--global-option="--rpath=/opt/librdkafka/lib/" \
+	--global-option="--library-dirs=/opt/librdkafka/lib" \
+	--global-option="--include-dirs=/opt/librdkafka/include/librdkafka"
