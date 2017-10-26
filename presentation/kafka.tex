@@ -1,0 +1,40 @@
+\documentclass[12pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{graphicx}
+\usetheme{Dresden}
+
+\usepackage{tikz}
+
+\begin{document}
+	\author{Daniel, Fabian, Hauke und Tom (all B.Sc.)}
+	\title{Apache Kafka}
+	%\subtitle{}
+	%\logo{}
+	\institute{Modellierung von Informationssystemen}
+	\date{01. Dezember 2017}
+	%\subject{}
+	%\setbeamercovered{transparent}
+	\setbeamertemplate{navigation symbols}{}
+	
+	
+\usebackgroundtemplate{		% declare background template 
+	\begin{tikzpicture}[remember picture, overlay]
+	\node[opacity=1.0, xshift=-3.8cm, yshift=2.25cm, at=(current page.south)] {
+		\includegraphics[scale=0.08]{figure/kafka_diagram.png}};  
+	\end{tikzpicture}
+}
+
+\begin{frame}[plain]
+	\maketitle
+\end{frame}
+
+\usebackgroundtemplate{ }    % undeclare background template
+
+
+\include{section/konzept}
+\include{section/tutorial}
+% \include{section/...}
+
+\end{document}
+
