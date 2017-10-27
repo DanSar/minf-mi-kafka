@@ -1,16 +1,14 @@
 #!/bin/bash
 
-librd_dir=/opt/librdkafka
 lib_dir=libs
 env_name=kafka_env
 
 # install librdkafka from repo
-sudo mkdir -p $librd_dir
 mkdir -p $lib_dir 
 cd $lib_dir
 git clone https://github.com/edenhill/librdkafka.git
 cd librdkafka/
-./configure --prefix=$librd_dir
+./configure
 make
 sudo make install
 
