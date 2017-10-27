@@ -1,7 +1,6 @@
 #!/bin/bash
 
-mkdir ./logs
-pip install kafka-python
+# for testing
 
 kafka_home=/usr/local/kafka_2.11-0.11.0.1
 kafka_bin="${kafka_home}/bin"
@@ -15,7 +14,7 @@ echo ""
 echo "stating zookeeper..."
 x-terminal-emulator -e "${kafka_bin}/zookeeper-server-start.sh ${kafka_config}/zookeeper.properties"
 
-sleep 4s
+sleep 5s
 
 # start kafka (new terminal)
 echo ""
@@ -34,12 +33,12 @@ echo "creating topic..."
 ${kafka_bin}/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic twitter
 
 # start test producer
-echo ""
-echo "stating test producer..."
-x-terminal-emulator -e "python3 ./producer.py"
+#echo ""
+#echo "stating test producer..."
+#x-terminal-emulator -e "python3 ./producer.py"
 
 # start test consumer
 echo ""
 echo "starting consumer..."
 echo ""
-./test-consumer.sh
+../consumer/test-consumer.sh

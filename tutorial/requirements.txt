@@ -1,4 +1,6 @@
 kafka-python==1.3.5
+python-twitter==3.3
+emoji==0.4.5
 confluent-kafka==0.11.0 --global-option=build_ext \
 	 --global-option="--rpath=/opt/librdkafka/lib/" \
 	--global-option="--library-dirs=/opt/librdkafka/lib" \
