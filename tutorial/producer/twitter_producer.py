@@ -29,7 +29,12 @@ def line_to_text(line):
 
 # connect to Kafka
 print('Connecting to kafka cluster...')
-producer = Producer(args.kafka)
+# Producer configuration
+# See https://github.com/edenhill/librdkafka/blob/master/CONFIGURATION.md
+conf = {'bootstrap.servers': args.kafka}
+
+# Create Producer instance
+p = Producer(**conf)
 
 # connect to twitter
 print('Connecting to twitter API...')
@@ -37,4 +42,6 @@ api = connect_to_twitter(args)
 
 stream = api.GetStreamFilter(track=[args.topic])
 for line in stream:
-    producer.produce(args.topic, bytes(line_to_text(line), 'utf-8'))
+    tweet = line_to_text(line)
+    print("sending " + tweet)
+    p.produce(args.topic, bytes(tweet, 'utf-8'))

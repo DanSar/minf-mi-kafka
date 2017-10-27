@@ -1,7 +1,7 @@
+import time
 from winton_kafka_streams.processor import BaseProcessor, TopologyBuilder
 import winton_kafka_streams.kafka_config as kafka_config
 import winton_kafka_streams.kafka_streams as kafka_streams
-
 from emoji import UNICODE_EMOJI
 
 class EmojiParserProcessor(BaseProcessor):
@@ -13,11 +13,11 @@ class EmojiParserProcessor(BaseProcessor):
     self.emojis = []
 
   def process(self, key, value):
-    self.emojis.append(self.extract_emojis(value))
+    self.emojis.extend(self.extract_emojis(value.decode("utf-8")))
     
   def punctuate(self, timestamp):
     for emoji in self.emojis:
-      self.context.forward(emoji, 1)
+      self.context.forward("emoji", emoji)
     self.emojis = []
 
   def extract_emojis(self, text): 
@@ -30,9 +30,9 @@ def run(src_topic, kafka_url):
 
   with TopologyBuilder() as topology_builder:
     topology_builder. \
-      source('tweets', [topic]). \
-      processor('emoji', EmojiParserProcessor, 'input-value'). \
-      sink('emojis', topic + '-emoji', emoji)
+      source('tweets', [src_topic]). \
+      processor('emoji', EmojiParserProcessor, 'tweets'). \
+      sink('emojis', src_topic + '-emoji', 'emoji')
 
   wks = kafka_streams.KafkaStreams(topology_builder, kafka_config)
   wks.start()
