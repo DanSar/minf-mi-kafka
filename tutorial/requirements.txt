@@ -1,6 +1,8 @@
 kafka-python==1.3.5
 python-twitter==3.3
 emoji==0.4.5
+matplotlib==2.1.0
+pandas==0.20.3
 confluent-kafka==0.11.0 --global-option=build_ext \
 	 --global-option="--rpath=/usr/local/lib/" \
 	--global-option="--library-dirs=/usr/local/lib" \
