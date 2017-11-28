@@ -32,6 +32,10 @@ Kafka ...
 \end{itemize}
 \end{frame}
 
+\pnote{- Nachrichten werden aufbewahrt}
+\pnote{- können bearbeitet werden}
+\pnote{- Echtzeit}
+
 \begin{frame}
 \frametitle{Unternehmen und Use Cases}
 
@@ -46,6 +50,14 @@ Kafka ...
 		& Log Delivery System\\~\\
 	\raisebox{-.25\height}{\includegraphics[scale=0.1]{figure/twitter_logo.pdf}} 
 		& Part of Storm stream processing infrastructure
+		
+		\pnote{* Zentrale Data Pipeline }
+		\pnote{- 1.4 Billarden Narichten/Tag 1400 Broker} % https://engineering.linkedin.com/blog/2016/04/kafka-ecosystem-at-linkedin
+		\pnote{* OpenSecurityOperationsCenter}
+		\pnote{- Als Messaging System zwischen Data Collection und Real Time Processing}
+		% We currently operate 36 Kafka clusters consisting of 4,000+ broker instances for both Fronting Kafka and Consumer Kafka. More than 700 billion messages are ingested on an average day.
+		\pnote{- Zum Einsammeln von Clientdaten eingesetzt}
+		
 \end{tabular}
 
 \end{frame}
@@ -54,7 +66,12 @@ Kafka ...
 \frametitle{Komponenten}
 	\centering
 	\includegraphics[scale=1.5]{figure/kafka-apis.png}
+	
+	%% Wird zusammengehalten durch Zookeeper
 \end{frame}
+
+
+%% Was sind Records? -> Auf Folie aufnehmen.
 
 \begin{frame}
 \frametitle{Queue}
@@ -68,6 +85,40 @@ Kafka ...
 \frametitle{Topic}
 	\centering
 	\includegraphics[scale=0.6]{figure/topic_draw.pdf}
+\end{frame}
+
+%% Messaging System
+\begin{frame}
+\frametitle{Kafka als Nachrichtensystem}
+
+Bisher: 
+\begin{itemize}
+	\item Queueing
+	\begin{itemize}
+		\item Nachrichten an einen
+		\item Nachrichtenverarbeitung skaliert
+		\item Nachricht abgerufen = Nachricht weg
+	\end{itemize}
+	\item Publish-Subscribe
+	\begin{itemize}
+		\item Nachrichten an alle
+		\item Skaliert nicht  			%Jeder bekommt die Nachricht. Daher nicht horizontal skallierbar.
+	\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Kafka Topic}
+\centering
+\includegraphics[scale=0.6]{figure/Kafka_topic_draw_subscribe.pdf}
+\end{frame}
+
+\begin{frame}
+\frametitle{Kafka Topic}
+\centering
+\includegraphics[scale=0.6]{figure/Kafka_topic_draw_Poll.pdf}
+\pnote{* Poll veringert die Kopplung von Consumern und Producern}
 \end{frame}
 
 \begin{frame}
@@ -97,6 +148,32 @@ Kafka ...
 \frametitle{Partitionen}
 \centering
 \includegraphics[scale=0.75]{figure/partition.pdf}
+\end{frame}
+
+\begin{frame}
+\frametitle{Partitionen}
+\begin{itemize}
+	\item Eine Partition für jedes Topic
+	\item Eine Partition ist
+	\begin{itemize}
+		\item Geordnet
+		\item Nicht-Veränderbare Sequenz von Records
+		\item Records können angehängt werden
+	\end{itemize}
+	\item Records sind nummeriert
+	\item Records nach Cleanup-Policy entfernt
+	\item Sequentielle Abarbeitung ist Standart
+	\item Sprung im Record-Log möglich
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Partitionen}
+\begin{itemize}
+	\item Skalierende Loggrößen ermöglicht
+	\item Parallelität wird ermöglicht
+	\item Können verteilt werden
+\end{itemize}
 \end{frame}
 
 %% Messaging System
@@ -231,6 +308,11 @@ Bisher:
 \begin{frame}
 \frametitle{Zusammenfassung}
 
+% Wie verpacken?
+%By combining storage and low-latency subscriptions, streaming applications can treat both past and future data the same way. That is a single application can process historical, stored data but rather than ending when it reaches the last record it can keep processing as future data arrives. This is a generalized notion of stream processing that subsumes batch processing as well as message-driven applications.
+
+%Likewise for streaming data pipelines the combination of subscription to real-time events make it possible to use Kafka for very low-latency pipelines; but the ability to store data reliably make it possible to use it for critical data where the delivery of data must be guaranteed or for integration with offline systems that load data only periodically or may go down for extended periods of time for maintenance. The stream processing facilities make it possible to transform data as it arrives.
+
 \begin{itemize}
 	\item geeignet für:
 	\begin{itemize}
@@ -241,9 +323,3 @@ Bisher:
 \end{itemize}
 
 \end{frame}
-
-% Wie verpacken?
-%By combining storage and low-latency subscriptions, streaming applications can treat both past and future data the same way. That is a single application can process historical, stored data but rather than ending when it reaches the last record it can keep processing as future data arrives. This is a generalized notion of stream processing that subsumes batch processing as well as message-driven applications.
-
-%Likewise for streaming data pipelines the combination of subscription to real-time events make it possible to use Kafka for very low-latency pipelines; but the ability to store data reliably make it possible to use it for critical data where the delivery of data must be guaranteed or for integration with offline systems that load data only periodically or may go down for extended periods of time for maintenance. The stream processing facilities make it possible to transform data as it arrives.
-
