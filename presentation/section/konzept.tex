@@ -131,7 +131,7 @@ Bisher:
 \begin{frame}
 \frametitle{Kafka Topics}
 \begin{itemize}
-	\item Vereinigt klassische Queue und Topic
+	\item Vereinigt klassische Queue und Pub/Sub
 	\item Multi-Subscribe ($0$ bis $n$ Consumer)		% Consumergroups - n Anzahl der Partitionen
 	\item Kein Push-System
 	\item Records in Topics werden persistent gehalten
@@ -220,20 +220,20 @@ Bisher:
 
 \end{frame}
 
-\begin{frame}
-\frametitle{Parallelität?}
-\begin{itemize}
-	\item Ordnung 
-	\begin{itemize}
-		\item Gesichert für alle Consumer Groups
-	\end{itemize}
-	\item Lastverteilung
-		\begin{itemize}
-		\item Nachricht 1x pro Consumer Group verarbeitet
-	\end{itemize}
-\end{itemize}
-
-\end{frame}
+%\begin{frame}
+%\frametitle{Parallelität?}
+%\begin{itemize}
+%	\item Ordnung 
+%	\begin{itemize}
+%		\item Gesichert für alle Consumer Groups
+%	\end{itemize}
+%	\item Lastverteilung
+%		\begin{itemize}
+%		\item Nachricht 1x pro Consumer Group verarbeitet
+%	\end{itemize}
+%\end{itemize}
+%
+%\end{frame}
 
 %% Storage System
 \begin{frame}
@@ -295,19 +295,29 @@ Bisher:
 \begin{itemize}
 	\item \texttt{Stream API} wird für nicht-triviales Stream Processing angeboten,
 	z.B. zur Aggregation oder Joins von Streams. 
-	\item \texttt{Stream API} kann auch umgehen mit:
+	\item \texttt{Stream API} unterstützt
 	\begin{itemize}
-		\item Daten, die nicht in Reihenfolge sind  % Shipments
-		\item Daten neu verarbeiten, wenn sich die Operation ändert % Preisanpassungen berechnen
-		\item Status behaftete Operationen sind möglich % Preisänderungen veröffentlichen
+		\item \textit{Exactly-once} Verarbeitung von Daten
+		\item Statusbehaftete Operationen, wie Joins und Aggregationen über Bereiche
+		\item Erneute Verarbeitung von Daten, wenn sich die Operation ändert
+		\item \textit{One-record-at-a-time Processing}, um Verarbeitungs"-latenz im Milli"-sekunden"-bereich garantieren zu können
 	\end{itemize}
 \end{itemize}
 
 %The streams API builds on the core primitives Kafka provides: it uses the producer and consumer APIs for input, uses Kafka for stateful storage, and uses the same group mechanism for fault tolerance among the stream processor instances.
 \end{frame}
 
+\subsection{Performance}
 \begin{frame}{Performance}
-	Ein bischen zu Performance
+	\centering
+	\includegraphics[scale=0.2]{figure/throughput_vs_size_0.png}
+
+	\pnote{- Don't fear the filesystem}
+	\pnote{-- Weiterentwickluing der Festplatten und Optimierungsmöglichkeiten}	
+	\pnote{-- Ensure linear write disk I/O -> können stark vom OS optimiert werden (read-ahead, write-behind)}
+	\pnote{-- Batching together small bits of data}
+	\pnote{}
+	\pnote{- Kafka kann O(1)}
 \end{frame}
 
 \begin{frame}
