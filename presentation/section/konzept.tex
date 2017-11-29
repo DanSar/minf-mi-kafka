@@ -1,5 +1,6 @@
-\begin{frame}
 \section{Konzept}
+\subsection{Einführung}
+\begin{frame}
 \frametitle{Was ist Apache Kafka?}
 \begin{columns}[T]
 	\begin{column}[T]{0.49\textwidth}
@@ -12,7 +13,8 @@
 
 \centering
 \begin{figure}[h]
-	\includegraphics[scale=0.1]{figure/kafka_diagram.png}
+	\includegraphics[scale=0.8]{figure/kafka-apis.png}
+	\caption{Apache Kafka~\cite{Kafka}}
 \end{figure}
 
 Apache Kafka ist eine verteilte skalierbare Streaming Plattform.
@@ -30,13 +32,20 @@ Kafka ...
 	\item kann Nachrichten verarbeiten
 	\item kann all das in Echtzeit
 \end{itemize}
-\end{frame}
 
 \pnote{- Nachrichten werden aufbewahrt}
 \pnote{- können bearbeitet werden}
 \pnote{- Echtzeit}
+\end{frame}
 
 
+\begin{frame}{Motivation}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.18]{figure/kafka_vs_hadoop.png}
+		\caption{Kafka and Hadoop~\cite{Rao17}}
+	\end{figure}
+\end{frame}
 
 
 \begin{frame}
@@ -48,11 +57,11 @@ Kafka ...
 	\raisebox{-.25\height}{\includegraphics[scale=0.2]{figure/cisco_logo.pdf}} 
 		& OpenSOC (Security Operations Center)\\~\\
 	\raisebox{-.25\height}{\includegraphics[scale=0.08]{figure/netflix_logo.pdf}} 
-		& Real-time monitoring and event-processing pipeline\\~\\
+		& Real-time Monitoring and Event-processing Pipeline\\~\\
 	\raisebox{-.25\height}{\includegraphics[scale=0.2]{figure/spotify_logo.pdf}} 
 		& Log Delivery System\\~\\
 	\raisebox{-.25\height}{\includegraphics[scale=0.1]{figure/twitter_logo.pdf}} 
-		& Part of Storm stream processing infrastructure
+		& Part of Storm Stream Processing Infrastructure
 		
 		\pnote{* Zentrale Data Pipeline }
 		\pnote{- 1.4 Billarden Narichten/Tag 1400 Broker} % https://engineering.linkedin.com/blog/2016/04/kafka-ecosystem-at-linkedin
@@ -62,17 +71,10 @@ Kafka ...
 		\pnote{- Zum Einsammeln von Clientdaten eingesetzt}
 		
 \end{tabular}
-
 \end{frame}
 
-\begin{frame}
-\frametitle{Überblick}
-	\centering
-	\includegraphics[scale=1.5]{figure/kafka-apis.png}
-	
-	%% Wird zusammengehalten durch Zookeeper
-\end{frame}
 
+\subsection{Grundlagen (Queue \& Topic)}
 
 %% Was sind Records? -> Auf Folie aufnehmen.
 
@@ -92,7 +94,7 @@ Kafka ...
 
 %% Messaging System
 \begin{frame}
-\frametitle{Kafka als Nachrichtensystem}
+\frametitle{Zusammenfassung}
 
 Bisher: 
 \begin{itemize}
@@ -108,9 +110,11 @@ Bisher:
 		\item Skaliert nicht  			%Jeder bekommt die Nachricht. Daher nicht horizontal skallierbar.
 	\end{itemize}
 \end{itemize}
-
 \end{frame}
 
+
+
+\subsection{Kafka Topic}
 \begin{frame}
 \frametitle{Kafka Topic}
 \centering
@@ -127,6 +131,7 @@ Bisher:
 \begin{frame}
 \frametitle{Kafka Topics}
 \begin{itemize}
+	\item Vereinigt klassische Queue und Topic
 	\item Multi-Subscribe ($0$ bis $n$ Consumer)		% Consumergroups - n Anzahl der Partitionen
 	\item Kein Push-System
 	\item Records in Topics werden persistent gehalten
@@ -156,7 +161,7 @@ Bisher:
 \begin{frame}
 \frametitle{Partitionen}
 \begin{itemize}
-	\item Eine Partition für jedes Topic
+	\item $1..n$ Partitionen für jedes Topic
 	\item Eine Partition ist
 	\begin{itemize}
 		\item Geordnet
@@ -164,8 +169,8 @@ Bisher:
 		\item Records können angehängt werden
 	\end{itemize}
 	\item Records sind nummeriert
-	\item Records nach Cleanup-Policy entfernt
-	\item Sequentielle Abarbeitung ist Standart
+	\item Records werden nach Cleanup-Policy entfernt
+	\item Sequentielle Abarbeitung ist Standard
 	\item Sprung im Record-Log möglich
 \end{itemize}
 \end{frame}
@@ -173,56 +178,50 @@ Bisher:
 \begin{frame}
 \frametitle{Partitionen}
 \begin{itemize}
-	\item Skalierende Loggrößen ermöglicht
-	\item Parallelität wird ermöglicht
-	\item Können verteilt werden
+	\item Verteilung der Partitionen ermöglicht
+	\begin{itemize}
+		\item Gute Skalierung
+		\item Parallele Abarbeitung
+	\end{itemize}
 \end{itemize}
 \end{frame}
 
+\subsection{Kafka Eigenschaften}
 %% Messaging System
 \begin{frame}
 \frametitle{Kafka als Nachrichtensystem}
 
-Bisher: 
-\begin{itemize}
-	\item Queueing
-	\begin{itemize}
-		\item Nachrichten an einen
-		\item Nachrichtenverarbeitung skaliert
-		\item Nachricht abgerufen = Nachricht weg
-	\end{itemize}
-	\item Publish-Subscribe
-	\begin{itemize}
-		\item Nachrichten an alle
-		\item Skaliert nicht  			%Jeder bekommt die Nachricht. Daher nicht horizontal skallierbar.
-	\end{itemize}
-\end{itemize}
+\begin{columns}[T] % contents are top vertically aligned
+	\begin{column}[T]{.65\textwidth} 
+		\begin{itemize}
+			\item Consumer Groups
+			\begin{itemize}
+				\item Kombiniert Queueing und Publish-Subscribe
+				\item Nachrichtenverarbeitung in Gruppen
+				\item Mehrere Consumer in einer Gruppe
+			\end{itemize}
+			\item Vorteile?
+			\begin{itemize}
+				\item Nachrichtenverarbeitung skaliert? % Durch Skalierung horizontal Groups und vertical mehrere consumer pro group
+			\end{itemize}
+			\item Reihenfolge wird eingehalten?
+		\end{itemize}
+	\end{column}
+	\begin{column}[T]{.35\textwidth}
+		\begin{figure}
+		\centering
+		\includegraphics[scale=0.5]{figure/consumer_groups.pdf}
+		\caption{Consumer Groups~\cite{Kafka}}
+		\end{figure}
+	\end{column}
+\end{columns}
 
-\end{frame}
 
-%% Messaging System
-\begin{frame}
-\frametitle{Kafka als Nachrichtensystem}
-
-\begin{itemize}
-	\item Consumer Groups
-	\begin{itemize}
-		\item Kombiniert Queueing und Publish-Subscribe
-		\item Nachrichtenverarbeitung in Gruppen
-		\item Mehrere Consumer in einer Gruppe
-	\end{itemize}
-	\item Vorteile
-	\begin{itemize}
-		\item Nachrichtenverarbeitung skaliert % Durch Skalierung horizontal Groups und vertical mehrere consumer pro group
-	\end{itemize}
-	\item Reihenfolge wird eingehalten 
-\end{itemize}
 
 \end{frame}
 
 \begin{frame}
-\frametitle{Parallelität}
-
+\frametitle{Parallelität?}
 \begin{itemize}
 	\item Ordnung 
 	\begin{itemize}
@@ -240,10 +239,15 @@ Bisher:
 \begin{frame}
 \frametitle{Kafka als Datenbank}
 
+\begin{block}{Kafka as a Storage System}
+	"Kafka [is] a kind of special purpose distributed filesystem dedicated to high-performance, low-latency commit log storage, replication, and propagation." \cite{Kafka}
+\end{block}
+
+
 \begin{itemize}
 	\item Durch Funktionalität bedingt
 	\begin{itemize}
-		\item Entkopplung sorgt für Speicherbedarf
+		\item Entkopplung  von Cunsumer und Producer sorgt für Speicherbedarf
 	\end{itemize}
 	\item Daten werden repliziert
 	\begin{itemize}
@@ -254,58 +258,56 @@ Bisher:
 
 \end{frame}
 
+%\begin{frame}
+%\frametitle{Kafka als Datenbank - 2}
+
+%\begin{itemize}
+%	\item Performanz bei steigender Datenmenge gleich
+%	\item Eigenschaften:
+%	\begin{itemize}
+%		\item Hohe Performanz
+%		\item Geringe Latenz %% Für Commit Log Storage
+%		\item Replikation
+%		\item Weiterleitung %% Von Nachrichten
+%	\end{itemize}
+%\end{itemize}
+%\end{frame}
+
 \begin{frame}
-\frametitle{Kafka als Datenbank - 2}
+\frametitle{Kafka für Stream Processing}
 
 \begin{itemize}
-	\item Performanz bei steigender Datenmenge gleich
-	\item Eigenschaften:
+	\item Anforderung: Streamverarbeitung in \textit{Echtzeit}!
+	\item Ein Stream Processor ...
 	\begin{itemize}
-		\item Hohe Performanz
-		\item Geringe Latenz %% Für Commit Log Storage
-		\item Replikation
-		\item Weiterleitung %% Von Nachrichten
+		\item nimmt kontinuierlich Daten aus einem \textit{Input} Topic,   % Shipments
+		\item bearbeitet die Daten und % Preisanpassungen berechnen
+		\item schreibt kontinuierlich Daten in ein \textit{Output} Topic % Preisänderungen veröffentlichen
 	\end{itemize}
 \end{itemize}
 
 \end{frame}
 
-\begin{frame}
-\frametitle{Kafka für Streams}
-
-\begin{itemize}
-	\item Echtzeit Stream-Verarbeitung
-	\item Ein Stream Processor:
-	\begin{itemize}
-		\item Nimmt kontinuierlich Daten aus einem Topic   % Shipments
-		\item Bearbeitet die Daten % Preisanpassungen berechnen
-		\item Schreibt kontinuierlich Daten in ein Topic % Preisänderungen veröffentlichen
-	\end{itemize}
-\end{itemize}
-
-\end{frame}
-
 
 \begin{frame}
-\frametitle{Kafka für Streams - 2}
+\frametitle{Kafka für Stream Processing - Stream API}
 
 \begin{itemize}
-	\item Extra Stream-API wird angeboten
+	\item \texttt{Stream API} wird für nicht-triviales Stream Processing angeboten,
+	z.B. zur Aggregation oder Joins von Streams. 
+	\item \texttt{Stream API} kann auch umgehen mit:
 	\begin{itemize}
-		\item Ermöglicht komplexere Operationen  % Shipments
-		\item Bearbeitet die Daten % Preisanpassungen berechnen
-		\item Schreibt kontinuierlich Daten in ein Topic % Preisänderungen veröffentlichen
-	\end{itemize}
-	\item Kann auch umgehen mit:
-	\begin{itemize}
-		\item Daten die nicht in Reihenfolge sind  % Shipments
-		\item Daten neu verarbeiten wenn sich die Operation ändert % Preisanpassungen berechnen
+		\item Daten, die nicht in Reihenfolge sind  % Shipments
+		\item Daten neu verarbeiten, wenn sich die Operation ändert % Preisanpassungen berechnen
 		\item Status behaftete Operationen sind möglich % Preisänderungen veröffentlichen
 	\end{itemize}
 \end{itemize}
 
 %The streams API builds on the core primitives Kafka provides: it uses the producer and consumer APIs for input, uses Kafka for stateful storage, and uses the same group mechanism for fault tolerance among the stream processor instances.
+\end{frame}
 
+\begin{frame}{Performance}
+	Ein bischen zu Performance
 \end{frame}
 
 \begin{frame}

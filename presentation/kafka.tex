@@ -2,11 +2,35 @@
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage{graphicx}
-\usetheme{Dresden}
+
+%\usetheme{Dresden}
+\usetheme{Berlin}
+%\usecolortheme{dolphin}
+
+\setbeamertemplate{mini frames}{}
 
 \usepackage{tikz}
 \usepackage{mwe}
 \usepackage{pdfpcnotes}
+
+\usepackage[%
+backend=bibtex
+,language=ngerman    % default: autobib, funktioniert manchmal nicht
+%,style=authoryear-comp
+,style=numeric-comp
+%,citestyle=authoryear-comp
+,citestyle=numeric-comp
+,sorting=none        % sorting: none, as cited
+,block=none
+,indexing=false
+,citereset=none
+,isbn=false
+,url=false
+,doi=false           % prints doi
+,natbib=true         % if you need natbib functions
+]{biblatex}
+
+\addbibresource{references.bib}
 
 \begin{document}
 	\author{Daniel, Fabian, Hauke und Tom}
@@ -18,6 +42,9 @@
 	%\subject{}
 	%\setbeamercovered{transparent}
 	\setbeamertemplate{navigation symbols}{}
+	
+	\setbeamertemplate{caption}[numbered]
+	\numberwithin{figure}{section}
 	
 	
 \usebackgroundtemplate{		% declare background template 
@@ -33,10 +60,19 @@
 
 \usebackgroundtemplate{ }    % undeclare background template
 
+\begin{frame}
+\tableofcontents
+\end{frame}
 
 \include{section/konzept}
 \include{section/tutorial}
 % \include{section/...}
+
+\begin{frame}[allowframebreaks]
+	\title{Literatur}
+	\nocite{*}
+	\printbibliography
+\end{frame}
 
 \end{document}
 
