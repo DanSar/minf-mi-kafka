@@ -13,7 +13,7 @@
 
 \centering
 \begin{figure}[h]
-	\includegraphics[scale=0.8]{figure/kafka-apis.png}
+	\includegraphics[scale=0.7]{figure/kafka-apis.png}
 	\caption{Apache Kafka~\cite{Kafka}}
 \end{figure}
 
@@ -42,7 +42,7 @@ Kafka ...
 \begin{frame}{Motivation}
 	\begin{figure}
 		\centering
-		\includegraphics[scale=0.18]{figure/kafka_vs_hadoop.png}
+		\includegraphics[scale=0.165]{figure/kafka_vs_hadoop.png}
 		\caption{Kafka and Hadoop~\cite{Rao17}}
 	\end{figure}
 \end{frame}
@@ -112,8 +112,6 @@ Bisher:
 \end{itemize}
 \end{frame}
 
-
-
 \subsection{Kafka Topic}
 \begin{frame}
 \frametitle{Kafka Topic}
@@ -125,7 +123,7 @@ Bisher:
 \frametitle{Kafka Topic}
 \centering
 \includegraphics[scale=0.6]{figure/Kafka_topic_draw_Poll.pdf}
-\pnote{* Poll veringert die Kopplung von Consumern und Producern}
+\pnote{* Poll verringert die Kopplung von Consumern und Producern}
 \end{frame}
 
 \begin{frame}
@@ -141,9 +139,15 @@ Bisher:
 			\item Retention-Size
 			\item Log-Compaction
 		\end{itemize}
-	\item Topics besitzen Partitionen (partition log)
-	\item Guarantees (dazu später mehr)
+	\item Guarantees
+	\item Topics besitzen Partitionen
 \end{itemize}
+\pnote{* Retention-Time: nach gewisser Zeit löschen}
+\pnote{* Retention-Size: ab gewisser größe löschen}
+\pnote{* Log-Compaction: hält von jeder message mit dem gleichen Key die neuste Nachricht. }
+
+\pnote{* Guarantees: Reihenfolgesicherung beim schreiben und lesen, Ausfall N-1 }
+
 \end{frame}
 
 \begin{frame}
