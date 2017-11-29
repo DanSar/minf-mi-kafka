@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as font_mng
 import pandas as pd
 
 from io import BytesIO
@@ -34,6 +35,9 @@ class EmojiChartProcessor(BaseProcessor):
         data = {'emoji_counts': pd.Series(count_list, index=emoji_list)}
         df = pd.DataFrame(data)
         fig, axis = plt.subplots()
+
+        font_mng._rebuild()
+
         # set font of x-axis
         for label in (axis.get_xticklabels()):
             label.set_fontname('EmojiOne Color')
