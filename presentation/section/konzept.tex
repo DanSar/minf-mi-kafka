@@ -36,6 +36,9 @@ Kafka ...
 \pnote{- können bearbeitet werden}
 \pnote{- Echtzeit}
 
+
+
+
 \begin{frame}
 \frametitle{Unternehmen und Use Cases}
 
@@ -63,7 +66,7 @@ Kafka ...
 \end{frame}
 
 \begin{frame}
-\frametitle{Komponenten}
+\frametitle{Überblick}
 	\centering
 	\includegraphics[scale=1.5]{figure/kafka-apis.png}
 	
@@ -95,13 +98,13 @@ Bisher:
 \begin{itemize}
 	\item Queueing
 	\begin{itemize}
-		\item Nachrichten an einen
+		\item Nachricht 1:1 Consumer
 		\item Nachrichtenverarbeitung skaliert
 		\item Nachricht abgerufen = Nachricht weg
 	\end{itemize}
 	\item Publish-Subscribe
 	\begin{itemize}
-		\item Nachrichten an alle
+		\item Nachrichten 1:N Consumer
 		\item Skaliert nicht  			%Jeder bekommt die Nachricht. Daher nicht horizontal skallierbar.
 	\end{itemize}
 \end{itemize}
