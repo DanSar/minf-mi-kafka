@@ -18,10 +18,16 @@
     framerule=0pt
 }
 \lstset{style=bashstyle}
-\begin{frame}[fragile]
+
+\begin{frame}
 \section{Tutorial}
-\subsection{Quickstart}
 \frametitle{Tutorial}
+\tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}[fragile]
+\subsection{Quickstart}
+\frametitle{Quickstart}
 \begin{itemize}
 \item Download Kafka~\cite{KafkaDownload}
 \end{itemize}
@@ -37,7 +43,7 @@ $ bin/kafka-server-start.sh config/server.properties
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Tutorial}
+\frametitle{Quickstart}
 \begin{lstlisting}[]
 $ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
 $ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
@@ -54,47 +60,75 @@ $ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test -
 
 \begin{frame}[fragile]
 \subsection{Properties}
-\frametitle{Tutorial}
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{ |c|c|c| } 
+\frametitle{Producer Properties}
+\begin{table}
+{\footnotesize
+\begin{tabularx}{\textwidth}{ |X|X|c| } 
 \hline 
 Name & Beschreibung & Typ \\ \hline \hline
-broker-list/bootstrap.servers & Host und Port für das Cluster & Liste \\ \hline
-topic & cell5 & cell6 \\ 
-cell7 & cell8 & cell9 \\ 
+batch-size & Anzahl an Nachrichten die innerhalb eines Batches ins Cluster gepusht werden (asynchrone Kommunikation) & Integer \\ \hline
+broker-list/\newline bootstrap.servers & Host- und Portliste zur Verbindung mit dem Cluster & Liste von Strings \\ \hline
+message-send-max-retries & Maximale Anzahl an Versuchen das Datum an den Broker zu pushen, bevor der Producer es droped & Integer \\ \hline
+topic & Topic unter welches die Daten ins Cluster gepusht werden & String  \\ 
 \hline
-\end{tabular}
-\caption{Producer Properties}
+\end{tabularx}
+}
+\caption{Beispiele für Producer Properties~\cite{KafkaPropProducer}}
 \label{producer_prop}
 \end{table}
-
+\begin{center}
+\end{center}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Tutorial}
+\frametitle{Consumer Properties}
+\begin{table}
+{\footnotesize
+\begin{tabularx}{\textwidth}{ |X|X|c| } 
+\hline 
+Name & Beschreibung & Typ \\ \hline \hline
+blacklist & Blacklisten von Topics die nicht aboniert werden sollen & Liste von Strings \\ \hline
+bootstrap.server/\newline bootstrap.servers & Host und Port zur Verbindung mit dem Cluster & String \\ \hline
+from-beginning & Hole die erste Nachricht im Log, sofern der Offset nicht definiert wurde & - \\ \hline
+topic & Topic unter welchem die Daten aus dem Cluster geholt werden sollen & String  \\ \hline
+whitelist & Whitelisten von Topics die aboniert werden sollen & Liste von Strings \\ 
+\hline
+\end{tabularx}
+}
+\caption{Beispiele Consumer Properties~\cite{KafkaPropConsumer}}
+\label{consumer_prop}
+\end{table}
+\begin{center}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Weitere Properties}
 \begin{itemize}
 \item Broker Properties~\cite{KafkaPropBroker}
+\item Streams Properties~\cite{KafkaPropStreams}
+\item Topic Properties~\cite{KafkaPropTopic}
+\item Connect Config Properties~\cite{KafkaPropConnectConfig}
+\item AdminClient Properties~\cite{KafkaPropAdminClient}
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 \subsection{Kafka Clients}
-\frametitle{Tutorial}
+\frametitle{Kafka Clients}
 \begin{itemize}
 \item Diverse Clients vorhanden~\cite{KafkaClients}
 \begin{itemize}
 \item Java, Python, Go, C/C++, .NET, Ruby, ...
 \end{itemize}
-\item Kafka in Java, daher der meiste Support
+\item Kafka in Java geschrieben, daher der meiste Support
 
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 \subsection{Twitter App}
-\frametitle{Tutorial}
+\frametitle{Twitter App~\cite{GithubRepo}}
 \begin{figure}
 \centering
 \includegraphics[width=0.95\textwidth]{figure/kafka_tut_diagram.pdf}
@@ -132,27 +166,35 @@ cell7 & cell8 & cell9 \\
 }
 \lstset{style=pythonstyle}
 \begin{frame}[fragile]
-\frametitle{Tutorial}
+\frametitle{Python Producer}
 \lstinputlisting[
 basicstyle=\scriptsize\ttfamily,
 caption=Python Producer]{snippets/snippet-producer.py}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Tutorial}
+\frametitle{Python Processor}
 \lstinputlisting[
 caption=Python Processor]{snippets/snippet-processor.py}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Tutorial}
+\frametitle{Python Consumer}
 \lstinputlisting[
 caption=Python Consumer]{snippets/snippet-consumer.py}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Tutorial}
+\frametitle{Screencast}
 \begin{center}
 \Large{Screencast Demo}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Fragen}
+\begin{center}
+\Large{Vielen Dank für Eure Aufmerksamkeit!
+\\Gibt es Fragen?}
 \end{center}
 \end{frame}

@@ -14,7 +14,7 @@
 \usepackage{pdfpcnotes}
 \usepackage{listings}
 \usepackage{xcolor}
-
+\usepackage{tabularx}
 \usepackage{hyperref}
 
 \usepackage[%
@@ -64,9 +64,15 @@ backend=bibtex
 
 \usebackgroundtemplate{ }    % undeclare background template
 
+%\begin{frame}
+%\tableofcontents
+%\end{frame}
+
 \begin{frame}
-\tableofcontents
+\section{Konzept}
+\tableofcontents[currentsection]
 \end{frame}
+
 
 \include{section/konzept}
 \include{section/tutorial}
