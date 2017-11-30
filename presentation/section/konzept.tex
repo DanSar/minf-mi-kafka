@@ -125,7 +125,7 @@ Bisher:
 \end{frame}
 
 \begin{frame}
-\frametitle{Kafka Topics}
+\frametitle{Kafka Topic}
 \begin{itemize}
 	\item Vereinigt klassischen Queue- und Topicansatz
 	\item Multi-Subscribe ($0$ bis $n$ Consumer)		% Consumergroups - n Anzahl der Partitionen
@@ -136,22 +136,21 @@ Bisher:
 	\item Topics benötigen eine Cleanup-Policy
 		\begin{itemize}
 			\item Retention-Time
+			\pnote{* Retention-Time: nach gewisser Zeit löschen}
 			\item Retention-Size
+			\pnote{* Retention-Size: ab gewisser größe löschen}
 			\item Log-Compaction
+			\pnote{* Log-Compaction: hält von jeder message mit dem gleichen Key die neuste Nachricht. }
 		\end{itemize}
 	\item Guarantees
 		\begin{itemize}
-			\item Recordreihenfolge wird eingehalten
-			\item Records werden ausgeliefert, wie sie im Log stehen
+			\item Reihenfolge der Records wird eingehalten
+			\pnote{Nachrichten in Reihenfolge im Log wie gesendet}
+			\item Consumer sehen die Einträge wie im Log gespeichert
 			\item N-1 Serverausfälle bei N Replikationen ohne Datenverluste
+			\pnote{* Guarantees: Reihenfolgesicherung beim schreiben und lesen, Ausfall N-1 }
 		\end{itemize}
 \end{itemize}
-\pnote{* Retention-Time: nach gewisser Zeit löschen}
-\pnote{* Retention-Size: ab gewisser größe löschen}
-\pnote{* Log-Compaction: hält von jeder message mit dem gleichen Key die neuste Nachricht. }
-
-\pnote{* Guarantees: Reihenfolgesicherung beim schreiben und lesen, Ausfall N-1 }
-
 \end{frame}
 
 \begin{frame}
