@@ -19,7 +19,7 @@
 
 Apache Kafka ist eine verteilte skalierbare Streaming Plattform.
 
-\pnote{- Beispielkommentar}
+\pnote{* APIs sind hier abgebildet.}
 \end{frame}
 
 
@@ -33,9 +33,6 @@ Kafka ...
 	\item kann all das in Echtzeit
 \end{itemize}
 
-\pnote{- Nachrichten werden aufbewahrt}
-\pnote{- können bearbeitet werden}
-\pnote{- Echtzeit}
 \end{frame}
 
 
@@ -104,9 +101,10 @@ Bisher:
 		\item Nachrichtenverarbeitung skaliert
 		\item Nachricht abgerufen = Nachricht weg
 	\end{itemize}
-	\item Publish-Subscribe
+	\item Topic
 	\begin{itemize}
 		\item Nachrichten 1:N Consumer
+		\item Nachrichten werden verteilt
 		\item Skaliert nicht  			%Jeder bekommt die Nachricht. Daher nicht horizontal skallierbar.
 	\end{itemize}
 \end{itemize}
@@ -129,10 +127,12 @@ Bisher:
 \begin{frame}
 \frametitle{Kafka Topics}
 \begin{itemize}
-	\item Vereinigt klassische Queue und Pub/Sub
+	\item Vereinigt klassischen Queue- und Topicansatz
 	\item Multi-Subscribe ($0$ bis $n$ Consumer)		% Consumergroups - n Anzahl der Partitionen
-	\item Kein Push-System
+	%\item Kein Push-System
+	\pnote{* Enkopplung durch Pull!}
 	\item Records in Topics werden persistent gehalten
+	\pnote{* Record: Nachricht + Time}
 	\item Topics benötigen eine Cleanup-Policy
 		\begin{itemize}
 			\item Retention-Time
@@ -140,7 +140,11 @@ Bisher:
 			\item Log-Compaction
 		\end{itemize}
 	\item Guarantees
-	\item Topics besitzen Partitionen
+		\begin{itemize}
+			\item Recordreihenfolge wird eingehalten
+			\item Records werden ausgeliefert, wie sie im Log stehen
+			\item N-1 Serverausfälle bei N Replikationen ohne Datenverluste
+		\end{itemize}
 \end{itemize}
 \pnote{* Retention-Time: nach gewisser Zeit löschen}
 \pnote{* Retention-Size: ab gewisser größe löschen}
