@@ -103,7 +103,7 @@ Bisher:
 	\end{itemize}
 	\item Topic
 	\begin{itemize}
-		\item Nachrichten 1:N Consumer
+		\item Nachrichten 1:$N$ Consumer
 		\item Nachrichten werden verteilt
 		\item Skaliert nicht  			%Jeder bekommt die Nachricht. Daher nicht horizontal skallierbar.
 	\end{itemize}
@@ -128,12 +128,12 @@ Bisher:
 \frametitle{Kafka Topic}
 \begin{itemize}
 	\item Vereinigt klassischen Queue- und Topicansatz
-	\item Multi-Subscribe ($0$ bis $n$ Consumer)		% Consumergroups - n Anzahl der Partitionen
+	\item Multi-Subscribe ($0$ bis $N$ Consumer)		% Consumergroups - n Anzahl der Partitionen
 	%\item Kein Push-System
 	\pnote{* Enkopplung durch Pull!}
 	\item Records in Topics werden persistent gehalten
 	\pnote{* Record: Nachricht + Time}
-	\item Topics benötigen eine Cleanup-Policy
+	\item Cleanup-Policies
 		\begin{itemize}
 			\item Retention-Time
 			\pnote{* Retention-Time: nach gewisser Zeit löschen}
