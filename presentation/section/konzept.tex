@@ -126,33 +126,28 @@ Bisher:
 \pnote{* Poll verringert die Kopplung von Consumern und Producern}
 \end{frame}
 
-
 \begin{frame}
-\frametitle{Kafka Topic}
+\frametitle{Kafka Topics}
 \begin{itemize}
 	\item Vereinigt klassische Queue und Pub/Sub
 	\item Multi-Subscribe ($0$ bis $n$ Consumer)		% Consumergroups - n Anzahl der Partitionen
-	%\item Kein Push-System
-	\pnote{kein Push -> Pull}
+	\item Kein Push-System
 	\item Records in Topics werden persistent gehalten
 	\item Topics benötigen eine Cleanup-Policy
 		\begin{itemize}
 			\item Retention-Time
-			\pnote{* Retention-Time: nach gewisser Zeit löschen}
 			\item Retention-Size
-			\pnote{* Retention-Size: ab gewisser größe löschen}
 			\item Log-Compaction
-			\pnote{* Log-Compaction: hält von jeder message mit dem gleichen Key die neuste Nachricht. }
 		\end{itemize}
 	\item Guarantees
-		\begin{itemize}
-			\item Reihenfolge der Records wird eingehalten
-			\pnote{Nachrichten in Reihenfolge im Log wie gesendet}
-			\item Consumer sehen die Einträge wie im Log gespeichert
-			\item Replikations Faktor N : N-1 Serverausfälle werden toleriert
-			\pnote{* Guarantees: Reihenfolgesicherung beim schreiben und lesen, Ausfall N-1 }
-		\end{itemize}
+	\item Topics besitzen Partitionen
 \end{itemize}
+\pnote{* Retention-Time: nach gewisser Zeit löschen}
+\pnote{* Retention-Size: ab gewisser größe löschen}
+\pnote{* Log-Compaction: hält von jeder message mit dem gleichen Key die neuste Nachricht. }
+
+\pnote{* Guarantees: Reihenfolgesicherung beim schreiben und lesen, Ausfall N-1 }
+
 \end{frame}
 
 \begin{frame}
@@ -340,7 +335,7 @@ Bisher:
 \begin{itemize}
 	\item geeignet für:
 	\begin{itemize}
-		\item   % Shipments
+		%\item   % Shipments
 		\item Bearbeitet die Daten % Preisanpassungen berechnen
 		\item Schreibt kontinuierlich Daten in ein Topic % Preisänderungen veröffentlichen
 	\end{itemize}

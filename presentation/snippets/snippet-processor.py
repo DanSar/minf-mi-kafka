@@ -11,13 +11,6 @@ with TopologyBuilder() as topology_builder1:
         processor('emoji', EmojiParserProcessor, 'tweets'). \
         sink('emojis', emoji_topic, 'emoji')
 
-with TopologyBuilder() as topology_builder2:
-    topology_builder2. \
-        source('emoji', [emoji_topic]). \
-        processor('chart', EmojiChartProcessor, 'emoji'). \
-        sink('chart_file', target_topic, 'chart')
-
 kafka_streams.KafkaStreams(topology_builder1, kafka_config).start()
-kafka_streams.KafkaStreams(topology_builder2, kafka_config).start()
 
 # close on termination

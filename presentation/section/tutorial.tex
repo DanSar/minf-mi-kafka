@@ -1,25 +1,36 @@
+\lstdefinestyle{bashstyle}{
+    language=bash,
+    backgroundcolor = \color{black},
+	basicstyle = \color{white}\footnotesize\ttfamily,
+	breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,        
+    framexleftmargin=6pt,
+    framexrightmargin=6pt,
+    framextopmargin=6pt,
+    framexbottommargin=6pt, 
+    frame=tb, 
+    framerule=0pt
+}
+\lstset{style=bashstyle}
 \begin{frame}[fragile]
 \section{Tutorial}
 \subsection{Quickstart}
 \frametitle{Tutorial}
 \begin{itemize}
-
 \item Download Kafka~\cite{KafkaDownload}
 \end{itemize}
-\begin{lstlisting}[
-backgroundcolor = \color{black},
-basicstyle = \color{white}\footnotesize\ttfamily,
-breaklines=true,
-language=bash]
+\begin{lstlisting}[]
 $ tar -xzf kafka_2.11-1.0.0.tgz
 $ cd kafka_2.11-1.0.0
 \end{lstlisting}
 
-\begin{lstlisting}[
-backgroundcolor = \color{black},
-basicstyle = \color{white}\footnotesize\ttfamily,
-breaklines=true,
-language=bash]
+\begin{lstlisting}[]
 $ bin/zookeeper-server-start.sh config/zookeeper.properties
 $ bin/kafka-server-start.sh config/server.properties
 \end{lstlisting}
@@ -27,22 +38,14 @@ $ bin/kafka-server-start.sh config/server.properties
 
 \begin{frame}[fragile]
 \frametitle{Tutorial}
-\begin{lstlisting}[
-backgroundcolor = \color{black},
-basicstyle = \color{white}\footnotesize\ttfamily,
-breaklines=true,
-language=bash]
+\begin{lstlisting}[]
 $ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
 $ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
 > This is a message
 > This is another message
 \end{lstlisting}
 
-\begin{lstlisting}[
-backgroundcolor = \color{black},
-basicstyle = \color{white}\footnotesize\ttfamily,
-breaklines=true,
-language=bash]
+\begin{lstlisting}[]
 $ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
 > This is a message
 > This is another message
@@ -50,7 +53,6 @@ $ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test -
 \end{frame}
 
 \begin{frame}[fragile]
-\section{Tutorial}
 \subsection{Properties}
 \frametitle{Tutorial}
 
@@ -60,7 +62,7 @@ $ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test -
 \hline 
 Name & Beschreibung & Typ \\ \hline \hline
 broker-list/bootstrap.servers & Host und Port für das Cluster & Liste \\ \hline
-ell4 & cell5 & cell6 \\ 
+topic & cell5 & cell6 \\ 
 cell7 & cell8 & cell9 \\ 
 \hline
 \end{tabular}
@@ -75,4 +77,82 @@ cell7 & cell8 & cell9 \\
 \begin{itemize}
 \item Broker Properties~\cite{KafkaPropBroker}
 \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\subsection{Kafka Clients}
+\frametitle{Tutorial}
+\begin{itemize}
+\item Diverse Clients vorhanden~\cite{KafkaClients}
+\begin{itemize}
+\item Java, Python, Go, C/C++, .NET, Ruby, ...
+\end{itemize}
+\item Kafka in Java, daher der meiste Support
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\subsection{Twitter App}
+\frametitle{Tutorial}
+\begin{figure}
+\centering
+\includegraphics[width=0.95\textwidth]{figure/kafka_tut_diagram.pdf}
+\caption{Architektur Twitter App}
+\end{figure}
+\end{frame}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{pythonstyle}{
+	language=Python,
+    basicstyle=\scriptsize\ttfamily,
+	backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,        
+    framexleftmargin=6pt,
+    framexrightmargin=6pt,
+    framextopmargin=6pt,
+    framexbottommargin=6pt, 
+    frame=tb, 
+    framerule=0pt
+}
+\lstset{style=pythonstyle}
+\begin{frame}[fragile]
+\frametitle{Tutorial}
+\lstinputlisting[
+basicstyle=\scriptsize\ttfamily,
+caption=Python Producer]{snippets/snippet-producer.py}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Tutorial}
+\lstinputlisting[
+caption=Python Processor]{snippets/snippet-processor.py}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Tutorial}
+\lstinputlisting[
+caption=Python Consumer]{snippets/snippet-consumer.py}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Tutorial}
+\begin{center}
+\Large{Screencast Demo}
+\end{center}
 \end{frame}
