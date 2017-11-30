@@ -9,16 +9,14 @@
 		
 \end{column}
 \end{columns}
+	\centering
+	\includegraphics[scale=1.2]{figure/kafka-apis.png}
 
-\centering
-\begin{figure}[h]
-	\includegraphics[scale=1.0]{figure/kafka-apis.png}
-	\caption{Apache Kafka~\cite{Kafka}}
-\end{figure}
+	Apache Kafka ist eine verteilte skalierbare Streaming Plattform.
 
-Apache Kafka ist eine verteilte skalierbare Streaming Plattform.
+	\BottomRightText{\textit{Graphics based on}~\cite{Kafka}}
 
-\pnote{* APIs sind hier abgebildet.}
+	\pnote{* APIs sind hier abgebildet.}
 \end{frame}
 
 
@@ -76,16 +74,20 @@ Kafka ...
 
 \begin{frame}
 \frametitle{Queue}
-\begin{center}
-	\centering
-	\includegraphics[scale=0.6]{figure/queue_draw.pdf}
-\end{center}
+	\begin{center}
+		\centering
+		\includegraphics[scale=0.6]{figure/queue_draw.pdf}
+	\end{center}
+	
+	\BottomRightText{\textit{Graphics based on}~\cite{Bengel14}}
 \end{frame}
 
 \begin{frame}
 \frametitle{Topic}
 	\centering
 	\includegraphics[scale=0.6]{figure/topic_draw.pdf}
+	
+	\BottomRightText{\textit{Graphics based on}~\cite{Bengel14}}
 \end{frame}
 
 %% Messaging System
@@ -177,12 +179,16 @@ Bisher:
 \frametitle{Partitionen}
 	\centering
 	\includegraphics[scale=0.75]{figure/partitioned_log.pdf}
+	
+	\BottomRightText{\textit{Graphics based on}~\cite{Kafka}}
 \end{frame}
 
 \begin{frame}
 \frametitle{Partitionen}
-\centering
-\includegraphics[scale=0.75]{figure/partition.pdf}
+	\centering
+	\includegraphics[scale=0.75]{figure/partition.pdf}
+	
+	\BottomRightText{\textit{Graphics based on}~\cite{Kafka}}
 \end{frame}
 
 \begin{frame}
@@ -203,7 +209,7 @@ Bisher:
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%% Kafka Funktionen %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Kafka Eigenschaften}
+\subsection{Eigenschaften von Kafka}
 %% Messaging System
 \begin{frame}
 \frametitle{Kafka als Nachrichtensystem}
@@ -221,13 +227,11 @@ Bisher:
 		\begin{figure}
 		\centering
 		\includegraphics[scale=0.7]{figure/consumer_groups.pdf}
-		\caption{Beispiel Consumer Groups~\cite{Kafka}}
 		\end{figure}
 	\end{column}
 \end{columns}
 
-
-
+\BottomRightText{\textit{Graphics based on}~\cite{Kafka}}
 \end{frame}
 
 %\begin{frame}
@@ -262,34 +266,18 @@ Bisher:
 	\end{itemize}
 	\item Daten können repliziert werden
 \end{itemize}
-
 \end{frame}
-
-%\begin{frame}
-%\frametitle{Kafka als Datenbank - 2}
-
-%\begin{itemize}
-%	\item Performanz bei steigender Datenmenge gleich
-%	\item Eigenschaften:
-%	\begin{itemize}
-%		\item Hohe Performanz
-%		\item Geringe Latenz %% Für Commit Log Storage
-%		\item Replikation
-%		\item Weiterleitung %% Von Nachrichten
-%	\end{itemize}
-%\end{itemize}
-%\end{frame}
 
 \begin{frame}
 \frametitle{Kafka für Stream Processing}
 
 \begin{itemize}
 	\item Anforderung: Streamverarbeitung in \textit{Echtzeit}!
-	\item Ein Stream Processor ...
+	\item Ein Stream Processor
 	\begin{itemize}
-		\item nimmt kontinuierlich Daten aus einem \textit{Input} Topic,   % Shipments
-		\item bearbeitet die Daten und % Preisanpassungen berechnen
-		\item schreibt kontinuierlich Daten in ein \textit{Output} Topic % Preisänderungen veröffentlichen
+		\item nimmt kontinuierlich Daten aus einem \textit{Input} Topic,
+		\item bearbeitet die Daten und
+		\item schreibt kontinuierlich Daten in ein \textit{Output} Topic 
 	\end{itemize}
 \end{itemize}
 
@@ -314,12 +302,12 @@ Bisher:
 %The streams API builds on the core primitives Kafka provides: it uses the producer and consumer APIs for input, uses Kafka for stateful storage, and uses the same group mechanism for fault tolerance among the stream processor instances.
 \end{frame}
 
-\subsection{Performance}
-\begin{frame}{Performance}
+\subsection{Performance Analyse}
+\begin{frame}{Performance Analyse}
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.2]{figure/throughput_vs_size_0.png}
-	\caption{Performance Analyse: Durchsatz vs Datengröße~\cite{KafkaPerf}}
+	\caption{Performance Analyse -- Durchsatz vs Datengröße~\cite{KafkaPerf}}
 \end{figure}
 
 	\pnote{- Don't fear the filesystem}

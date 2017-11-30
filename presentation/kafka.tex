@@ -16,6 +16,7 @@
 \usepackage{xcolor}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage[absolute,overlay]{textpos}
 
 \usepackage[%
 backend=bibtex
@@ -28,13 +29,21 @@ backend=bibtex
 ,block=none
 ,indexing=false
 ,citereset=none
-,isbn=false
+,isbn=true
 ,url=false
 ,doi=false           % prints doi
 ,natbib=true         % if you need natbib functions
 ]{biblatex}
 
 \addbibresource{references.bib}
+
+\newcommand\BottomRightText[1]{%
+	\begin{textblock*}{\paperwidth}(0pt,0.97\textheight)
+		\raggedleft \scriptsize{#1}\hspace{.5em}
+	\end{textblock*}
+}
+
+\setbeamertemplate{bibliography item}{\insertbiblabel}
 
 \begin{document}
 	\author{Daniel, Fabian, Hauke und Tom}
@@ -79,8 +88,7 @@ backend=bibtex
 % \include{section/...}
 
 \begin{frame}[allowframebreaks]
-	\title{Literatur}
-	\nocite{*}
+	\frametitle{Literatur}
 	\printbibliography
 \end{frame}
 
