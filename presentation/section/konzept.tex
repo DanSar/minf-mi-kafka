@@ -150,6 +150,27 @@ Bisher:
 
 \end{frame}
 
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Partitionen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Partitionen}
+\begin{itemize}
+	\item Jedes Topic besteht aus $1..n$ Partitionen
+	\item Eigenschaften von Partitionen
+	\begin{itemize}
+		\item Records sind geordnet
+		\item Nicht-Veränderbare Sequenz von Records
+		\item Records können nur angehängt werden
+	\end{itemize}
+	\item Records werden über \texttt{offset} identifiziert
+	\item Records werden nach Cleanup-Policy entfernt
+	\item Lesezugriff auf Records in Partitionen
+	\begin{itemize}
+		\item Aufsteigend sequentieller Zugriff ist Standard
+		\item Wahlfreier Zugriff auf Records auch möglich
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
 \begin{frame}
 \frametitle{Partitionen}
 	\centering
@@ -164,58 +185,41 @@ Bisher:
 
 \begin{frame}
 \frametitle{Partitionen}
-\begin{itemize}
-	\item $1..n$ Partitionen für jedes Topic
-	\item Eine Partition ist
+	Verteilung der Partitionen unterstützt
 	\begin{itemize}
-		\item Geordnet
-		\item Nicht-Veränderbare Sequenz von Records
-		\item Records können angehängt werden
+		\item Skalierung\\
+			Topic kann durch Partitionen einfach auf mehrere Server verteilt werden.
+		\item Parallele Verarbeitung
+		\begin{itemize}
+			\item Load Balancing
+			\item Ordering Guarantees
+			%Kafka is able to provide both ordering guarantees and load balancing over a pool of consumer processes
+		\end{itemize}
 	\end{itemize}
-	\item Records sind nummeriert
-	\item Records werden nach Cleanup-Policy entfernt
-	\item Sequentielle Abarbeitung ist Standard
-	\item Sprung im Record-Log möglich
-\end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Partitionen}
-\begin{itemize}
-	\item Verteilung der Partitionen ermöglicht
-	\begin{itemize}
-		\item Gute Skalierung
-		\item Parallele Abarbeitung
-	\end{itemize}
-\end{itemize}
-\end{frame}
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%% Kafka Funktionen %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Kafka Eigenschaften}
 %% Messaging System
 \begin{frame}
 \frametitle{Kafka als Nachrichtensystem}
-
+\centering
 \begin{columns}[T] % contents are top vertically aligned
-	\begin{column}[T]{.65\textwidth} 
+	\begin{column}[T]{.5\textwidth} 
+		Consumer Groups
 		\begin{itemize}
-			\item Consumer Groups
-			\begin{itemize}
-				\item Kombiniert Queueing und Publish-Subscribe
-				\item Nachrichtenverarbeitung in Gruppen
-				\item Mehrere Consumer in einer Gruppe
-			\end{itemize}
-			\item Vorteile?
-			\begin{itemize}
-				\item Nachrichtenverarbeitung skaliert? % Durch Skalierung horizontal Groups und vertical mehrere consumer pro group
-			\end{itemize}
-			\item Reihenfolge wird eingehalten?
+			\item Nachrichtenverarbeitung in Gruppen
+			\item Mehrere Consumer werden in einer Gruppe organisiert
+			\item Kombiniert Queueing und Publish-Subscribe
 		\end{itemize}
 	\end{column}
-	\begin{column}[T]{.35\textwidth}
+	\begin{column}[T]{.5\textwidth}
 		\begin{figure}
 		\centering
-		\includegraphics[scale=0.5]{figure/consumer_groups.pdf}
-		\caption{Consumer Groups~\cite{Kafka}}
+		\includegraphics[scale=0.7]{figure/consumer_groups.pdf}
+		\caption{Beispiel Consumer Groups~\cite{Kafka}}
 		\end{figure}
 	\end{column}
 \end{columns}
@@ -241,7 +245,7 @@ Bisher:
 
 %% Storage System
 \begin{frame}
-\frametitle{Kafka als Datenbank}
+\frametitle{Kafka als Speichersystem}
 
 \begin{block}{Kafka as a Storage System}
 	"Kafka [is] a kind of special purpose distributed filesystem dedicated to high-performance, low-latency commit log storage, replication, and propagation." \cite{Kafka}
@@ -249,15 +253,12 @@ Bisher:
 
 
 \begin{itemize}
-	\item Durch Funktionalität bedingt
+	\item Entkopplung von Consumer und Producer sorgt für Speicherbedarf
+	\item Daten werden immer persistent gehalten
 	\begin{itemize}
-		\item Entkopplung  von Cunsumer und Producer sorgt für Speicherbedarf
+		\item Kafka arbeitet somit \textit{nicht} In-Memory
 	\end{itemize}
-	\item Daten werden repliziert
-	\begin{itemize}
-		\item Bestätigungsmechanismen sind vorhanden
-		\item Wird erst bestätigt, wenn Replication abgeschlossen ist
-	\end{itemize}
+	\item Daten können repliziert werden
 \end{itemize}
 
 \end{frame}
@@ -313,8 +314,11 @@ Bisher:
 
 \subsection{Performance}
 \begin{frame}{Performance}
+\begin{figure}
 	\centering
 	\includegraphics[scale=0.2]{figure/throughput_vs_size_0.png}
+	\caption{Performance Analyse: Durchsatz vs Datengröße~\cite{KafkaPerf}}
+\end{figure}
 
 	\pnote{- Don't fear the filesystem}
 	\pnote{-- Weiterentwickluing der Festplatten und Optimierungsmöglichkeiten}	
