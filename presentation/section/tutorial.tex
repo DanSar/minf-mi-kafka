@@ -1,6 +1,78 @@
-\begin{frame}
+\begin{frame}[fragile]
 \section{Tutorial}
+\subsection{Quickstart}
 \frametitle{Tutorial}
-%% ...
+\begin{itemize}
+
+\item Download Kafka~\cite{KafkaDownload}
+\end{itemize}
+\begin{lstlisting}[
+backgroundcolor = \color{black},
+basicstyle = \color{white}\footnotesize\ttfamily,
+breaklines=true,
+language=bash]
+$ tar -xzf kafka_2.11-1.0.0.tgz
+$ cd kafka_2.11-1.0.0
+\end{lstlisting}
+
+\begin{lstlisting}[
+backgroundcolor = \color{black},
+basicstyle = \color{white}\footnotesize\ttfamily,
+breaklines=true,
+language=bash]
+$ bin/zookeeper-server-start.sh config/zookeeper.properties
+$ bin/kafka-server-start.sh config/server.properties
+\end{lstlisting}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Tutorial}
+\begin{lstlisting}[
+backgroundcolor = \color{black},
+basicstyle = \color{white}\footnotesize\ttfamily,
+breaklines=true,
+language=bash]
+$ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+$ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+> This is a message
+> This is another message
+\end{lstlisting}
+
+\begin{lstlisting}[
+backgroundcolor = \color{black},
+basicstyle = \color{white}\footnotesize\ttfamily,
+breaklines=true,
+language=bash]
+$ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
+> This is a message
+> This is another message
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\section{Tutorial}
+\subsection{Properties}
+\frametitle{Tutorial}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ |c|c|c| } 
+\hline 
+Name & Beschreibung & Typ \\ \hline \hline
+broker-list/bootstrap.servers & Host und Port für das Cluster & Liste \\ \hline
+ell4 & cell5 & cell6 \\ 
+cell7 & cell8 & cell9 \\ 
+\hline
+\end{tabular}
+\caption{Producer Properties}
+\label{producer_prop}
+\end{table}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Tutorial}
+\begin{itemize}
+\item Broker Properties~\cite{KafkaPropBroker}
+\end{itemize}
+\end{frame}
